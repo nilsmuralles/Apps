@@ -19,8 +19,30 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.uvg.navigationapp.CharacterDb
 import com.uvg.navigationapp.layouts.characterList.CustomTopBar
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme
+
+val charDB = CharacterDb()
+
+@Composable
+fun CharacterProfileRoute(
+    modifier: Modifier,
+    charID: Int,
+    onBack: () -> Unit
+){
+    val character = charDB.getCharacterById(charID)
+    CharacterProfileScreen(
+        modifier = Modifier
+            .fillMaxSize(),
+        image = character.image,
+        name = character.name,
+        species = character.species,
+        status = character.status,
+        gender = character.gender,
+        onBack = onBack
+    )
+}
 
 @Composable
 private fun CharacterProfileScreen(
@@ -29,14 +51,16 @@ private fun CharacterProfileScreen(
     name: String,
     species: String,
     status: String,
-    gender: String
+    gender: String,
+    onBack: () -> Unit
 ){
     Column (
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
     ){
         CustomTopBar(
-            title = "Character Detail"
+            title = "Character Detail",
+            onBack = onBack
         )
         Row (
             modifier = Modifier
@@ -93,7 +117,8 @@ private fun CharacterProfileScreenPreview(){
                 name = "Morty Smith",
                 species = "Human",
                 status = "Alive",
-                gender = "Male"
+                gender = "Male",
+                onBack = { }
             )
         }
     }

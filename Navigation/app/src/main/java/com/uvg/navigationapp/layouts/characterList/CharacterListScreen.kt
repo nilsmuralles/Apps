@@ -24,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -32,24 +31,42 @@ import com.uvg.navigationapp.Character
 import com.uvg.navigationapp.CharacterDb
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme
 
+val charDB = CharacterDb()
+
+@Composable
+fun CharacterListRoute(
+    modifier: Modifier,
+    onCharacterClick: (Int) -> Unit,
+    onBack: () -> Unit
+){
+    CharacterListScreen(
+        characters = charDB.getAllCharacters(),
+        onCharacterClick = onCharacterClick,
+        onBack = onBack
+    )
+}
+
 @Composable
 fun CharacterListScreen(
     characters: List<Character>,
-    onCharacterClick: (Int) -> Unit
+    onCharacterClick: (Int) -> Unit,
+    onBack: () -> Unit
 ){
     Column {
         CustomTopBar(
-            title = "Characters"
+            title = "Characters",
+            onBack = onBack
         )
         LazyColumn {
             itemsIndexed(characters) { index, character ->
                 Character(
-                    modifier = Modifier
-                        .clickable { onCharacterClick(character.id) },
                     image = character.image,
                     name = character.name,
                     species = character.species,
-                    status = character.status
+                    status = character.status,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { onCharacterClick(character.id) }
                 )
             }
         }
@@ -59,7 +76,8 @@ fun CharacterListScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomTopBar(
-    title: String
+    title: String,
+    onBack: () -> Unit
 ){
     TopAppBar(
         title = {
@@ -71,7 +89,7 @@ fun CustomTopBar(
             navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
         ),
         navigationIcon = {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = onBack) {
                 Icon(
                     Icons.Default.ArrowBack,
                     contentDescription = "Back"
@@ -92,7 +110,8 @@ private fun Character(
     Row (
         modifier = Modifier
             .fillMaxWidth()
-            .padding(25.dp),
+            .padding(25.dp)
+            .clickable {  },
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ){
         Column {
@@ -120,8 +139,7 @@ private fun Character(
 
 @Preview
 @Composable
-private fun CharacterListScreenPreview(){
-    val charDB = CharacterDb()
+private fun CharacterListScreenPreview() {
     val characters = rememberSaveable {
         charDB.getAllCharacters()
     }
@@ -129,7 +147,8 @@ private fun CharacterListScreenPreview(){
         Surface(modifier = Modifier.fillMaxSize()) {
             CharacterListScreen(
                 characters = characters,
-                onCharacterClick = { }
+                onCharacterClick = { },
+                onBack = { }
             )
         }
     }
