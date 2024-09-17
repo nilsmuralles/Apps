@@ -59,7 +59,7 @@ fun CharacterListScreen(
             onBack = onBack
         )
         LazyColumn {
-            items(characters){ character ->
+            items(characters) { character ->
                 Character(
                     image = character.image,
                     name = character.name,
@@ -67,6 +67,7 @@ fun CharacterListScreen(
                     status = character.status,
                     modifier = Modifier
                         .fillMaxWidth()
+                        .padding(25.dp)
                         .clickable { onCharacterClick(character.id) }
                 )
             }
@@ -109,10 +110,7 @@ private fun Character(
     status: String
 ){
     Row (
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(25.dp)
-            .clickable {  },
+        modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ){
         Column {
