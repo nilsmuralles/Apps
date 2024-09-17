@@ -60,7 +60,8 @@ private fun CharacterProfileScreen(
     ){
         CustomTopBar(
             title = "Character Detail",
-            onBack = onBack
+            onBack = onBack,
+            hasBack = true
         )
         Row (
             modifier = Modifier

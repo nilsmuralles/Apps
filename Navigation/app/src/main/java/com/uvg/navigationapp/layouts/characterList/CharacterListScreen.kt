@@ -56,7 +56,8 @@ fun CharacterListScreen(
     Column {
         CustomTopBar(
             title = "Characters",
-            onBack = onBack
+            onBack = onBack,
+            hasBack = false
         )
         LazyColumn {
             items(characters) { character ->
@@ -79,26 +80,40 @@ fun CharacterListScreen(
 @Composable
 fun CustomTopBar(
     title: String,
+    hasBack: Boolean,
     onBack: () -> Unit
 ){
-    TopAppBar(
-        title = {
-            Text(title)
-        },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            titleContentColor = MaterialTheme.colorScheme.onPrimary,
-            navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
-        ),
-        navigationIcon = {
-            IconButton(onClick = onBack) {
-                Icon(
-                    Icons.Default.ArrowBack,
-                    contentDescription = "Back"
-                )
+    if (hasBack){
+        TopAppBar(
+            title = {
+                Text(title)
+            },
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                titleContentColor = MaterialTheme.colorScheme.onPrimary,
+                navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
+            ),
+            navigationIcon = {
+                IconButton(onClick = onBack) {
+                    Icon(
+                        Icons.Default.ArrowBack,
+                        contentDescription = "Back"
+                    )
+                }
             }
-        }
-    )
+        )
+    } else {
+        TopAppBar(
+            title = {
+                Text(title)
+            },
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                titleContentColor = MaterialTheme.colorScheme.onPrimary,
+                navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
+            )
+        )
+    }
 }
 
 @Composable
