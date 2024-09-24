@@ -1,4 +1,4 @@
-package com.uvg.navigationapp.layouts.login
+package com.uvg.navigationapp.presentation.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

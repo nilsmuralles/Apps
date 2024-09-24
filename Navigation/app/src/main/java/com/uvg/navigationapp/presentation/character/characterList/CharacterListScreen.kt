@@ -1,4 +1,4 @@
-package com.uvg.navigationapp.layouts.characterList
+package com.uvg.navigationapp.presentation.character.characterList
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -9,14 +9,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.BottomNavigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -28,8 +33,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.uvg.navigationapp.Character
-import com.uvg.navigationapp.CharacterDb
+import com.uvg.navigationapp.data.model.Character
+import com.uvg.navigationapp.data.source.CharacterDb
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme
 
 val charDB = CharacterDb()
@@ -53,24 +58,74 @@ fun CharacterListScreen(
     onCharacterClick: (Int) -> Unit,
     onBack: () -> Unit
 ){
-    Column {
-        CustomTopBar(
-            title = "Characters",
-            onBack = onBack,
-            hasBack = false
-        )
-        LazyColumn {
-            items(characters) { character ->
-                Character(
-                    image = character.image,
-                    name = character.name,
-                    species = character.species,
-                    status = character.status,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(25.dp)
-                        .clickable { onCharacterClick(character.id) }
-                )
+    Scaffold (
+        bottomBar = {
+            BottomNavigation {
+                NavigationBar {
+                    NavigationBarItem(
+                        icon = {
+                            Icon(
+                                Icons.Default.Person,
+                                ""
+                            )
+                        },
+                        onClick = {},
+                        selected = true,
+                        label = {
+                            Text("Characters")
+                        }
+                    )
+                    NavigationBarItem(
+                        icon = {
+                            Icon(
+                                Icons.Default.Place,
+                                ""
+                            )
+                        },
+                        onClick = {},
+                        selected = false,
+                        label = {
+                            Text("Locations")
+                        }
+                    )
+                    NavigationBarItem(
+                        icon = {
+                            Icon(
+                                Icons.Default.Person,
+                                ""
+                            )
+                        },
+                        onClick = {},
+                        selected = false,
+                        label = {
+                            Text("Profile")
+                        }
+                    )
+                }
+            }
+        }
+    ){ innerPadding ->
+        Column (
+            modifier = Modifier.padding(innerPadding)
+        ){
+            CustomTopBar(
+                title = "Characters",
+                onBack = onBack,
+                hasBack = false
+            )
+            LazyColumn {
+                items(characters) { character ->
+                    Character(
+                        image = character.image,
+                        name = character.name,
+                        species = character.species,
+                        status = character.status,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(25.dp)
+                            .clickable { onCharacterClick(character.id) }
+                    )
+                }
             }
         }
     }

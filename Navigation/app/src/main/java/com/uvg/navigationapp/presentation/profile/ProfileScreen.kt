@@ -1,4 +1,4 @@
-package com.uvg.navigationapp.layouts.profile
+package com.uvg.navigationapp.presentation.profile
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

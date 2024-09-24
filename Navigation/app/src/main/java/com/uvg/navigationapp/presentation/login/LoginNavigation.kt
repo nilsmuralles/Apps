@@ -1,4 +1,4 @@
-package com.uvg.navigationapp.layouts.login
+package com.uvg.navigationapp.presentation.login
 
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder

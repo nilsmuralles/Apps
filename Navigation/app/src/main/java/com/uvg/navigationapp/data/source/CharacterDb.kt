@@ -1,4 +1,6 @@
-package com.uvg.navigationapp
+package com.uvg.navigationapp.data.source
+
+import com.uvg.navigationapp.data.model.Character
 
 class CharacterDb {
     private val characters: List<Character> = listOf(

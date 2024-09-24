@@ -1,7 +1,7 @@
-package com.uvg.navigationapp.layouts.locationList
+package com.uvg.navigationapp.presentation.location.locationList
 
-import Location
-import LocationDb
+import com.uvg.navigationapp.data.model.Location
+import com.uvg.navigationapp.data.source.LocationDb
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,7 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.uvg.navigationapp.layouts.characterList.CustomTopBar
+import com.uvg.navigationapp.presentation.character.characterList.CustomTopBar
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme
 
 @Composable

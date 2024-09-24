@@ -1,3 +1,7 @@
+package com.uvg.navigationapp.data.source
+
+import com.uvg.navigationapp.data.model.Location
+
 // import .....Location
 
 class LocationDb {
