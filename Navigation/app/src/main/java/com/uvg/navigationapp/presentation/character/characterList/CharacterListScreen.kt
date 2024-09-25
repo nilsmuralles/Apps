@@ -58,74 +58,24 @@ fun CharacterListScreen(
     onCharacterClick: (Int) -> Unit,
     onBack: () -> Unit
 ){
-    Scaffold (
-        bottomBar = {
-            BottomNavigation {
-                NavigationBar {
-                    NavigationBarItem(
-                        icon = {
-                            Icon(
-                                Icons.Default.Person,
-                                ""
-                            )
-                        },
-                        onClick = {},
-                        selected = true,
-                        label = {
-                            Text("Characters")
-                        }
-                    )
-                    NavigationBarItem(
-                        icon = {
-                            Icon(
-                                Icons.Default.Place,
-                                ""
-                            )
-                        },
-                        onClick = {},
-                        selected = false,
-                        label = {
-                            Text("Locations")
-                        }
-                    )
-                    NavigationBarItem(
-                        icon = {
-                            Icon(
-                                Icons.Default.Person,
-                                ""
-                            )
-                        },
-                        onClick = {},
-                        selected = false,
-                        label = {
-                            Text("Profile")
-                        }
-                    )
-                }
-            }
-        }
-    ){ innerPadding ->
-        Column (
-            modifier = Modifier.padding(innerPadding)
-        ){
-            CustomTopBar(
-                title = "Characters",
-                onBack = onBack,
-                hasBack = false
-            )
-            LazyColumn {
-                items(characters) { character ->
-                    Character(
-                        image = character.image,
-                        name = character.name,
-                        species = character.species,
-                        status = character.status,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(25.dp)
-                            .clickable { onCharacterClick(character.id) }
-                    )
-                }
+    Column {
+        CustomTopBar(
+            title = "Characters",
+            onBack = onBack,
+            hasBack = false
+        )
+        LazyColumn {
+            items(characters) { character ->
+                Character(
+                    image = character.image,
+                    name = character.name,
+                    species = character.species,
+                    status = character.status,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(25.dp)
+                        .clickable { onCharacterClick(character.id) }
+                )
             }
         }
     }

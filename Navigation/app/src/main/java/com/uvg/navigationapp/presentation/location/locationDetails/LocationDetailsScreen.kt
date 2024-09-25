@@ -20,13 +20,28 @@ import com.uvg.navigationapp.presentation.character.characterList.CustomTopBar
 import com.uvg.navigationapp.presentation.profile.ProfileElement
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme
 
+val locationDb = LocationDb()
+
+@Composable
+fun LocationDetailsRoute(
+    locationID: Int,
+    onBack: () -> Unit
+){
+    val location = locationDb.getLocationById(locationID)
+    LocationDetailsScreen(
+        location = location,
+        onBack = onBack
+    )
+}
+
 @Composable
 private fun LocationDetailsScreen(
-    modifier: Modifier,
     location: Location,
     onBack: () -> Unit
 ){
-    Column {
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
         CustomTopBar(
             title = "Location Details",
             hasBack = true,
@@ -69,7 +84,6 @@ private fun LocationListPreview(){
         val locationDb = LocationDb()
         Surface (modifier = Modifier.fillMaxSize()){
             LocationDetailsScreen(
-                modifier = Modifier.fillMaxSize(),
                 location = locationDb.getLocationById(1),
                 onBack = {  }
             )

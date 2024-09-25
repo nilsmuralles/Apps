@@ -1,6 +1,5 @@
 package com.uvg.navigationapp.presentation.login
 
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import kotlinx.serialization.Serializable
@@ -13,7 +12,6 @@ fun NavGraphBuilder.loginScreen(
 ){
     composable<LoginDestination>{
         LoginRoute(
-            modifier = Modifier,
             onLoginClick = onLoginClick
         )
     }

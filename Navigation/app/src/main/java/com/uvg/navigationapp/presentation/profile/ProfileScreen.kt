@@ -24,6 +24,17 @@ import coil.compose.AsyncImage
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme
 
 @Composable
+fun ProfileRoute(
+    modifier: Modifier,
+    onLogOutClick: () -> Unit
+){
+    ProfileScreen(
+        modifier = modifier,
+        onLogOutClick = onLogOutClick
+    )
+}
+
+@Composable
 private fun ProfileScreen(
     modifier: Modifier,
     onLogOutClick: () -> Unit

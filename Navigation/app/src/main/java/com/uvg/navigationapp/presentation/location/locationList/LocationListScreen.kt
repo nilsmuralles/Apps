@@ -20,6 +20,18 @@ import androidx.compose.ui.unit.dp
 import com.uvg.navigationapp.presentation.character.characterList.CustomTopBar
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme
 
+val locationDb = LocationDb()
+
+@Composable
+fun LocationListRoute(
+    onLocationClick: (Int) -> Unit,
+){
+    LocationListScreen(
+        onLocationClick = onLocationClick,
+        locations = locationDb.getAllLocations()
+    )
+}
+
 @Composable
 private fun LocationListScreen(
     locations: List<Location>,
@@ -72,7 +84,6 @@ private fun LocationElement(
 @Composable
 private fun LocationListPreview(){
     NavigationAppTheme {
-        val locationDb = LocationDb()
         Surface (modifier = Modifier.fillMaxSize()){
             LocationListScreen(
                 locations = locationDb.getAllLocations()

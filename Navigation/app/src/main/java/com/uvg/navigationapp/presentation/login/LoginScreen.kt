@@ -24,7 +24,6 @@ import com.uvg.navigationapp.ui.theme.NavigationAppTheme
 
 @Composable
 fun LoginRoute(
-    modifier: Modifier,
     onLoginClick: () -> Unit
 ){
     LoginScreen(
@@ -40,6 +39,7 @@ fun LoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
+            .fillMaxSize()
             .padding(50.dp)
     ){
         Image(
@@ -60,7 +60,7 @@ fun LoginScreen(
     }
     Row(
         modifier = Modifier
-            .fillMaxHeight()
+            .fillMaxSize()
             .padding(35.dp)
         ,
         verticalAlignment = Alignment.Bottom,
