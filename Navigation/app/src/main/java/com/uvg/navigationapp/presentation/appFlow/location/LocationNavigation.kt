@@ -1,16 +1,16 @@
-package com.uvg.navigationapp.presentation.location
+package com.uvg.navigationapp.presentation.appFlow.location
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.navOptions
 import androidx.navigation.navigation
-import com.uvg.navigationapp.presentation.location.locationDetails.LocationDetailsDestination
-import com.uvg.navigationapp.presentation.location.locationDetails.locationDetailsScreen
-import com.uvg.navigationapp.presentation.location.locationDetails.navigateToLocationDetailsScreen
-import com.uvg.navigationapp.presentation.location.locationList.LocationListDestination
-import com.uvg.navigationapp.presentation.location.locationList.locationListScreen
-import com.uvg.navigationapp.presentation.location.locationList.navigateToLocationList
+import com.uvg.navigationapp.presentation.appFlow.location.locationDetails.LocationDetailsDestination
+import com.uvg.navigationapp.presentation.appFlow.location.locationDetails.locationDetailsScreen
+import com.uvg.navigationapp.presentation.appFlow.location.locationDetails.navigateToLocationDetailsScreen
+import com.uvg.navigationapp.presentation.appFlow.location.locationList.LocationListDestination
+import com.uvg.navigationapp.presentation.appFlow.location.locationList.locationListScreen
+import com.uvg.navigationapp.presentation.appFlow.location.locationList.navigateToLocationList
 import kotlinx.serialization.Serializable
 
 @Serializable

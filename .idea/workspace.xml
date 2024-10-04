@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="dc2db3c4-5b78-4b27-b211-76abdae46bed" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Navigation/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Navigation/.idea/deploymentTargetSelector.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Navigation/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Navigation/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Navigation/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/Navigation/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Navigation/app/src/main/java/com/uvg/navigationapp/layouts/characterList/CharacterListScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Navigation/app/src/main/java/com/uvg/navigationapp/layouts/characterList/CharacterListScreen.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +33,7 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "Laboratorio09",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Nils/Documents/Universidad/PlataformasMoviles/Apps/Navigation"
   }

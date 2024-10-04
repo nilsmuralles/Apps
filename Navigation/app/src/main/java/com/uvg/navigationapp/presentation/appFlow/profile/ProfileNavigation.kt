@@ -1,11 +1,11 @@
-package com.uvg.navigationapp.presentation.profile
+package com.uvg.navigationapp.presentation.appFlow.profile
 
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.uvg.navigationapp.presentation.character.characterProfile.navigateToCharacterProfileScreen
+import com.uvg.navigationapp.presentation.appFlow.character.characterProfile.navigateToCharacterProfileScreen
 import kotlinx.serialization.Serializable
 
 @Serializable

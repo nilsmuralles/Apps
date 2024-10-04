@@ -1,4 +1,4 @@
-package com.uvg.navigationapp.presentation.character.characterProfile
+package com.uvg.navigationapp.presentation.appFlow.character.characterProfile
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.uvg.navigationapp.data.source.CharacterDb
-import com.uvg.navigationapp.presentation.character.characterList.CustomTopBar
+import com.uvg.navigationapp.presentation.appFlow.character.characterList.CustomTopBar
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme
 
 val charDB = CharacterDb()

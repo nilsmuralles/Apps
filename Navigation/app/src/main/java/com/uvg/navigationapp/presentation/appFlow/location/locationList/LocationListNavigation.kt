@@ -1,4 +1,4 @@
-package com.uvg.navigationapp.presentation.location.locationList
+package com.uvg.navigationapp.presentation.appFlow.location.locationList
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder

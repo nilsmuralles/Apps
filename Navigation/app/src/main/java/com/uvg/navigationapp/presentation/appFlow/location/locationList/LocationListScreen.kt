@@ -1,4 +1,4 @@
-package com.uvg.navigationapp.presentation.location.locationList
+package com.uvg.navigationapp.presentation.appFlow.location.locationList
 
 import com.uvg.navigationapp.data.model.Location
 import com.uvg.navigationapp.data.source.LocationDb
@@ -17,7 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.uvg.navigationapp.presentation.character.characterList.CustomTopBar
+import com.uvg.navigationapp.presentation.appFlow.character.characterList.CustomTopBar
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme
 
 val locationDb = LocationDb()

@@ -1,4 +1,4 @@
-package com.uvg.navigationapp.presentation.character.characterProfile
+package com.uvg.navigationapp.presentation.appFlow.character.characterProfile
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
