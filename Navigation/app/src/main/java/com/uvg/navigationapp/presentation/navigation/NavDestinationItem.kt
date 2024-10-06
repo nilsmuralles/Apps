@@ -16,3 +16,4 @@ val topLevelDestinations = listOf(
     LocationListDestination::class,
     ProfileDestination::class
 )
+

@@ -23,25 +23,25 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.uvg.navigationapp.presentation.appFlow.character.CharacterNavGraph
 import com.uvg.navigationapp.presentation.appFlow.character.characterGraph
-import com.uvg.navigationapp.presentation.appFlow.character.characterList.CharacterListDestination
 import com.uvg.navigationapp.presentation.appFlow.location.LocationNavGraph
 import com.uvg.navigationapp.presentation.appFlow.location.locationGraph
 import com.uvg.navigationapp.presentation.appFlow.profile.ProfileDestination
 import com.uvg.navigationapp.presentation.appFlow.profile.profileScreen
 import com.uvg.navigationapp.presentation.login.LoginDestination
+import com.uvg.navigationapp.presentation.login.loginScreen
 import com.uvg.navigationapp.presentation.navigation.NavDestinationItem
 import com.uvg.navigationapp.presentation.navigation.topLevelDestinations
 
 @SuppressLint("RestrictedApi")
 @Composable
 fun AppFlowScreen(
-    modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController()
 ) {
     val navItems = listOf(
@@ -93,8 +93,14 @@ fun AppFlowScreen(
                                 },
                                 selected = index == selected,
                                 onClick = {
+                                    navController.navigate(navItem.destination) {
+                                        popUpTo(navController.graph.findStartDestination().id) {
+                                            saveState = true
+                                        }
+                                        launchSingleTop = true
+                                        restoreState = true
+                                    }
                                     selected = index
-                                    navController.navigate(navItem.destination)
                                 },
                                 colors = NavigationBarItemDefaults.colors(
                                     indicatorColor = MaterialTheme.colorScheme.primaryContainer
@@ -111,6 +117,8 @@ fun AppFlowScreen(
             startDestination = CharacterNavGraph,
             modifier = Modifier.padding(innerPadding)
         ) {
+            loginScreen {}
+
             characterGraph(navController)
 
             locationGraph(navController)
@@ -118,8 +126,11 @@ fun AppFlowScreen(
             profileScreen(
                 modifier = Modifier.fillMaxSize(),
                 onLogOutClick = {
+                    navController.clearBackStack<AppFlowNavigationGraph>()
                     navController.navigate(LoginDestination) {
-                        popUpTo(0)
+                        popUpTo(navController.graph.startDestinationId) {
+                            inclusive = true
+                        }
                     }
                 }
             )

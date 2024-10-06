@@ -29,9 +29,7 @@ fun NavGraphBuilder.locationGraph(
         locationListScreen (
             onLocationClick = { id ->
                 navController.navigateToLocationDetailsScreen(
-                    destination = LocationDetailsDestination(
-                        locationID = id
-                    )
+                    locationID = id
                 )
             }
         )

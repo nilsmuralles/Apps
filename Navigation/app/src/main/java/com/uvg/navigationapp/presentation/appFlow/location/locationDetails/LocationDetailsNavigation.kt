@@ -13,19 +13,20 @@ data class LocationDetailsDestination(
 )
 
 fun NavController.navigateToLocationDetailsScreen(
-    destination: LocationDetailsDestination,
+    locationID: Int,
     navOptions: NavOptions? = null
 ) {
-    this.navigate(destination, navOptions)
+    this.navigate(
+        route = LocationDetailsDestination(locationID = locationID),
+        navOptions
+    )
 }
 
 fun NavGraphBuilder.locationDetailsScreen(
     onBack: () -> Unit
 ) {
-    composable<LocationDetailsDestination> { backstackEntry ->
-        val destination: LocationDetailsDestination = backstackEntry.toRoute()
+    composable<LocationDetailsDestination> {
         LocationDetailsRoute (
-            locationID = destination.locationID,
             onBack = onBack
         )
     }
