@@ -13,8 +13,12 @@ fun NavController.navigateToMainGraph(navOptions: NavOptions? = null) {
     this.navigate(AppFlowNavigationGraph, navOptions)
 }
 
-fun NavGraphBuilder.mainNavigationGraph() {
+fun NavGraphBuilder.mainNavigationGraph(
+    onLogOutClick: () -> Unit
+) {
     composable<AppFlowNavigationGraph> {
-        AppFlowScreen()
+        AppFlowScreen(
+            onLogOutClick = onLogOutClick
+        )
     }
 }
