@@ -24,7 +24,6 @@ fun NavGraphBuilder.characterListScreen(
 ) {
     composable<CharacterListDestination> {
         CharacterListRoute(
-            modifier = Modifier.fillMaxSize(),
             onCharacterClick = onCharacterClick,
             onBack = onBack
         )

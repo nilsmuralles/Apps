@@ -29,9 +29,7 @@ fun NavGraphBuilder.characterGraph(
         characterListScreen(
             onCharacterClick = { id ->
                 navController.navigateToCharacterProfileScreen(
-                    destination = CharacterProfileDestination(
-                        charID = id
-                    )
+                    charID = id
                 )
             },
             onBack = {

@@ -1,30 +1,30 @@
-package com.uvg.navigationapp.presentation.appFlow.location.locationDetails
+package com.uvg.navigationapp.presentation.appFlow.character.characterProfile
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.uvg.navigationapp.data.source.LocationDb
+import com.uvg.navigationapp.data.source.CharacterDb
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class LocationDetailsViewModel (
+class CharacterProfileViewModel (
     savedStateHandle: SavedStateHandle
-): ViewModel()
+):ViewModel()
 {
-    private val locationDb = LocationDb()
-    private val locationDetails = savedStateHandle.toRoute<LocationDetailsDestination>()
-    private val _uiState: MutableStateFlow<LocationDetailsState> = MutableStateFlow(LocationDetailsState())
+    private val characterDb = CharacterDb()
+    private val characterProfile = savedStateHandle.toRoute<CharacterProfileDestination>()
+    private val _uiState: MutableStateFlow<CharacterProfileState> = MutableStateFlow(CharacterProfileState())
     val uiState = _uiState.asStateFlow()
 
     init {
-        getLocationData()
+        getCharacterData()
     }
 
-    fun getLocationData() {
+    fun getCharacterData() {
         viewModelScope.launch {
             _uiState.update { state ->
                 state.copy(
@@ -34,18 +34,18 @@ class LocationDetailsViewModel (
             }
 
             delay(2000)
-            val location = locationDb.getLocationById(locationDetails.locationID)
+            val character = characterDb.getCharacterById(characterProfile.charID)
 
             _uiState.update { state ->
                 state.copy(
-                    data = location,
+                    data = character,
                     isLoading = false
                 )
             }
         }
     }
 
-    fun throwError(){
+    fun throwError() {
         viewModelScope.launch {
             _uiState.update { state ->
                 state.copy(

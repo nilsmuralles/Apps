@@ -3,6 +3,7 @@ package com.uvg.navigationapp.presentation.appFlow.location.locationList
 import com.uvg.navigationapp.data.model.Location
 import com.uvg.navigationapp.data.source.LocationDb
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,44 +15,102 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.uvg.navigationapp.presentation.appFlow.character.characterList.CustomTopBar
+import com.uvg.navigationapp.presentation.appFlow.location.locationDetails.ErrorLayout
+import com.uvg.navigationapp.presentation.appFlow.location.locationDetails.LoadingLayout
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme
-
-val locationDb = LocationDb()
 
 @Composable
 fun LocationListRoute(
+    viewModel: LocationListViewModel = viewModel(),
     onLocationClick: (Int) -> Unit,
 ){
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
     LocationListScreen(
+        state = state,
         onLocationClick = onLocationClick,
-        locations = locationDb.getAllLocations()
+        onClickWhileLoading = {
+            viewModel.throwError()
+        },
+        onRetryClick = {
+            viewModel.getLocations()
+        }
     )
 }
 
 @Composable
 private fun LocationListScreen(
-    locations: List<Location>,
-    onLocationClick: (Int) -> Unit
+    state: LocationListState,
+    onLocationClick: (Int) -> Unit,
+    onClickWhileLoading: () -> Unit,
+    onRetryClick: () -> Unit
 ){
     Column {
         CustomTopBar(
             title = "Locations",
-            onBack = {  },
+            onBack = { },
             hasBack = false
         )
-        LazyColumn {
-            items(locations) { location ->
-                LocationElement(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { onLocationClick(location.id) }
-                        .padding(25.dp),
-                    location = location
+        LocationListContent(
+            locations = state.data,
+            isLoading = state.isLoading,
+            hasError = state.hasError,
+            onClickWhileLoading = onClickWhileLoading,
+            onRetryClick = onRetryClick,
+            onLocationClick = onLocationClick,
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
+
+@Composable
+private fun LocationListContent(
+    locations: List<Location>?,
+    isLoading: Boolean,
+    hasError: Boolean,
+    onClickWhileLoading: () -> Unit,
+    onRetryClick: () -> Unit,
+    onLocationClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
+){
+    Box (
+        modifier = modifier
+    ){
+        when {
+            hasError -> {
+                ErrorLayout(
+                    label = "Error al obtener ubicaciones. Intenta de nuevo",
+                    onRetryClick = onRetryClick
                 )
+            }
+            isLoading -> {
+                LoadingLayout(
+                    label = "Cargando ubicaciones",
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clickable { onClickWhileLoading() }
+                )
+            }
+            else -> {
+                if (locations != null) {
+                    LazyColumn {
+                        items(locations) { location ->
+                            LocationElement(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable { onLocationClick(location.id) }
+                                    .padding(25.dp),
+                                location = location
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -85,9 +144,15 @@ private fun LocationElement(
 private fun LocationListPreview(){
     NavigationAppTheme {
         Surface (modifier = Modifier.fillMaxSize()){
+            val locationDb = LocationDb()
             LocationListScreen(
-                locations = locationDb.getAllLocations()
-            ) { }
+                state = LocationListState(
+                    data = locationDb.getAllLocations()
+                ),
+                onClickWhileLoading = { },
+                onRetryClick = { },
+                onLocationClick = { }
+            )
         }
     }
 }
