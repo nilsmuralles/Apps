@@ -14,21 +14,28 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme
 
 @Composable
 fun ProfileRoute(
+    viewModel: ProfileScreenViewModel = viewModel(factory = ProfileScreenViewModel.Factory),
     modifier: Modifier,
     onLogOutClick: () -> Unit
 ){
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
     ProfileScreen(
+        state = state,
         modifier = modifier,
         onLogOutClick = onLogOutClick
     )
@@ -36,6 +43,7 @@ fun ProfileRoute(
 
 @Composable
 private fun ProfileScreen(
+    state: ProfileScreenState,
     modifier: Modifier,
     onLogOutClick: () -> Unit
 ){
@@ -62,10 +70,12 @@ private fun ProfileScreen(
         Column(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            ProfileElement(
-                label = "Nombre",
-                value = "Nils Muralles Morales"
-            )
+            state.name?.let {
+                ProfileElement(
+                    label = "Nombre",
+                    value = it
+                )
+            }
             ProfileElement(
                 label = "Carné",
                 value = "23727"
@@ -114,11 +124,7 @@ fun ProfileElement(
 private fun ProfileScreenPreview(){
     NavigationAppTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            ProfileScreen(
-                modifier = Modifier
-                    .fillMaxSize(),
-                onLogOutClick = { }
-            )
+
         }
     }
 }
