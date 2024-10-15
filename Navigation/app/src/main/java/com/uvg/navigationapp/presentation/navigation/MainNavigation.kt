@@ -16,6 +16,10 @@ import com.uvg.navigationapp.presentation.appFlow.AppFlowScreen
 import com.uvg.navigationapp.presentation.appFlow.navigateToMainGraph
 import com.uvg.navigationapp.presentation.login.LoginDestination
 import com.uvg.navigationapp.presentation.login.LoginRoute
+import kotlinx.serialization.Serializable
+
+@Serializable
+data object SplashScreenDestination
 
 @Composable
 fun MainNavigation(
@@ -27,8 +31,11 @@ fun MainNavigation(
 
     NavHost(
         navController = navController,
-        startDestination = LoginDestination
+        startDestination = SplashScreenDestination
     ) {
+        composable<SplashScreenDestination> {
+
+        }
         composable<LoginDestination> {
             LoginRoute(
                 onLoginClick = authViewModel::login
@@ -55,6 +62,7 @@ fun MainNavigation(
                     popUpTo(0)
                 }
             }
+            AuthStatus.Loading -> { }
         }
     }
 }

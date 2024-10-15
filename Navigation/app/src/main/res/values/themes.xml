@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="Theme.NavigationApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.NavigationApp.SplashScreen" parent="Theme.SplashScreen" >
+        <item name="windowSplashScreenBackground">@color/purple_200</item>
+        <item name="windowSplashScreenIconBackgroundColor">@android:color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.NavigationApp</item>
+    </style>
 </resources>

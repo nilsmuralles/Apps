@@ -34,7 +34,7 @@ class MainContentViewModel (
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000),
-            AuthStatus.NonAuthenticated
+            AuthStatus.Loading
         )
 
     fun login() {
