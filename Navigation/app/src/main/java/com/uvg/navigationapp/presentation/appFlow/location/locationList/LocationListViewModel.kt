@@ -1,16 +1,26 @@
 package com.uvg.navigationapp.presentation.appFlow.location.locationList
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
-import com.uvg.navigationapp.data.source.LocationDb
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.uvg.navigationapp.data.local.dao.LocationDAO
+import com.uvg.navigationapp.data.repository.LocalLocationRepository
+import com.uvg.navigationapp.di.Dependencies
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class LocationListViewModel(): ViewModel() {
-    private val locationDb = LocationDb()
+class LocationListViewModel(
+    private val locationDao: LocationDAO
+): ViewModel() {
+    private val locationRepository = LocalLocationRepository(
+        locationDao = locationDao
+    )
     private val _uiState: MutableStateFlow<LocationListState> = MutableStateFlow(LocationListState())
     val uiState = _uiState.asStateFlow()
 
@@ -18,7 +28,15 @@ class LocationListViewModel(): ViewModel() {
         getLocations()
     }
 
+    private fun populateLocations() {
+        viewModelScope.launch {
+            locationRepository.insertAllLocations()
+        }
+    }
+
     fun getLocations() {
+        populateLocations()
+
         viewModelScope.launch {
             _uiState.update { state ->
                 state.copy(
@@ -28,7 +46,7 @@ class LocationListViewModel(): ViewModel() {
             }
 
             delay(4000)
-            val locations = locationDb.getAllLocations()
+            val locations = locationRepository.getAllLocations()
 
             _uiState.update { state ->
                 state.copy(
@@ -45,6 +63,18 @@ class LocationListViewModel(): ViewModel() {
                 state.copy(
                     hasError = true,
                     isLoading = false
+                )
+            }
+        }
+    }
+
+    companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val application = checkNotNull(this[APPLICATION_KEY])
+                val db = Dependencies.provideDatabase(application)
+                LocationListViewModel(
+                    locationDao = db.locationDao()
                 )
             }
         }

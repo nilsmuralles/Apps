@@ -1,6 +1,6 @@
 package com.uvg.navigationapp.data.source
 
-import com.uvg.navigationapp.data.model.Location
+import com.uvg.navigationapp.domain.model.Location
 
 // import .....Location
 

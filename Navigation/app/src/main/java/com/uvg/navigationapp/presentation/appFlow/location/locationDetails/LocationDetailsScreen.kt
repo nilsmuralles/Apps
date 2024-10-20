@@ -27,7 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.uvg.navigationapp.data.model.Location
+import com.uvg.navigationapp.domain.model.Location
 import com.uvg.navigationapp.presentation.appFlow.character.characterList.CustomTopBar
 import com.uvg.navigationapp.presentation.appFlow.profile.ProfileElement
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme

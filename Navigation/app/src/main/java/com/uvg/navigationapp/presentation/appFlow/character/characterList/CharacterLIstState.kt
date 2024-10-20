@@ -1,6 +1,6 @@
 package com.uvg.navigationapp.presentation.appFlow.character.characterList
 
-import com.uvg.navigationapp.data.model.Character
+import com.uvg.navigationapp.domain.model.Character
 
 data class CharacterLIstState(
     val isLoading: Boolean = false,

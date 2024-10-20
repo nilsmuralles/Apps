@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.uvg.navigationapp.data.DataStoreUserPrefs
+import com.uvg.navigationapp.data.local.DataStoreUserPrefs
 import com.uvg.navigationapp.dataStore
-import com.uvg.navigationapp.domain.UserPreferences
+import com.uvg.navigationapp.domain.repository.UserPreferences
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map

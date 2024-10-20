@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import com.uvg.navigationapp.data.model.Character
+import com.uvg.navigationapp.domain.model.Character
 import com.uvg.navigationapp.presentation.appFlow.character.characterList.CustomTopBar
 import com.uvg.navigationapp.presentation.appFlow.location.locationDetails.ErrorLayout
 import com.uvg.navigationapp.presentation.appFlow.location.locationDetails.LoadingLayout

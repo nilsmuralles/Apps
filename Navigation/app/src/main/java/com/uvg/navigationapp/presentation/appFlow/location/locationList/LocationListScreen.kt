@@ -1,6 +1,6 @@
 package com.uvg.navigationapp.presentation.appFlow.location.locationList
 
-import com.uvg.navigationapp.data.model.Location
+import com.uvg.navigationapp.domain.model.Location
 import com.uvg.navigationapp.data.source.LocationDb
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -28,7 +28,7 @@ import com.uvg.navigationapp.ui.theme.NavigationAppTheme
 
 @Composable
 fun LocationListRoute(
-    viewModel: LocationListViewModel = viewModel(),
+    viewModel: LocationListViewModel = viewModel(factory = LocationListViewModel.Factory),
     onLocationClick: (Int) -> Unit,
 ){
     val state by viewModel.uiState.collectAsStateWithLifecycle()

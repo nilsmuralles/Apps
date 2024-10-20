@@ -11,25 +11,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.BottomNavigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,15 +30,15 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import com.uvg.navigationapp.data.model.Character
 import com.uvg.navigationapp.data.source.CharacterDb
+import com.uvg.navigationapp.domain.model.Character
 import com.uvg.navigationapp.presentation.appFlow.location.locationDetails.ErrorLayout
 import com.uvg.navigationapp.presentation.appFlow.location.locationDetails.LoadingLayout
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme
 
 @Composable
 fun CharacterListRoute(
-    viewModel: CharacterLIstViewModel = viewModel(),
+    viewModel: CharacterLIstViewModel = viewModel(factory = CharacterLIstViewModel.Factory),
     onCharacterClick: (Int) -> Unit,
     onBack: () -> Unit
 ){

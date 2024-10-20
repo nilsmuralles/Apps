@@ -1,4 +1,4 @@
-package com.uvg.navigationapp.domain
+package com.uvg.navigationapp.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 

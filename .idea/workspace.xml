@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc2db3c4-5b78-4b27-b211-76abdae46bed" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Navigation/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Navigation/.idea/deploymentTargetSelector.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Navigation/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/Navigation/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Navigation/app/src/main/java/com/uvg/navigationapp/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Navigation/app/src/main/java/com/uvg/navigationapp/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Navigation/app/src/main/java/com/uvg/navigationapp/presentation/login/LoginScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Navigation/app/src/main/java/com/uvg/navigationapp/presentation/login/LoginScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Navigation/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Navigation/gradle/libs.versions.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

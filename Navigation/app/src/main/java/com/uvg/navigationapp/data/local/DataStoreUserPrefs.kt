@@ -1,11 +1,11 @@
-package com.uvg.navigationapp.data
+package com.uvg.navigationapp.data.local
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.uvg.navigationapp.domain.UserPreferences
+import com.uvg.navigationapp.domain.repository.UserPreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.map
 class DataStoreUserPrefs (
     private val dataStore: DataStore<Preferences>
 
-): UserPreferences{
+): UserPreferences {
     private val nameKey = stringPreferencesKey("name")
     private val loggedKey = booleanPreferencesKey("logged")
 

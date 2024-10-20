@@ -1,4 +1,4 @@
-package com.uvg.navigationapp.data.model
+package com.uvg.navigationapp.domain.model
 
 data class Location(
     val id: Int,
