@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.uvg.navigationapp.domain.network.util.DataError
 import com.uvg.navigationapp.presentation.appFlow.character.characterList.CustomTopBar
 import com.uvg.navigationapp.presentation.appFlow.location.locationDetails.ErrorLayout
 import com.uvg.navigationapp.presentation.appFlow.location.locationDetails.LoadingLayout
@@ -36,7 +37,7 @@ fun LocationListRoute(
         state = state,
         onLocationClick = onLocationClick,
         onClickWhileLoading = {
-            viewModel.throwError()
+            viewModel.throwError(DataError.GENERIC_ERROR)
         },
         onRetryClick = {
             viewModel.getLocations()
