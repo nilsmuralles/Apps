@@ -58,6 +58,7 @@ android {
 
 dependencies {
     val nav_version = "2.8.0"
+    implementation(libs.bundles.ktor)
     implementation("androidx.core:core-splashscreen:1.0.0")
     implementation(libs.androidx.datastore)
     implementation("androidx.compose.material:material:1.7.1")

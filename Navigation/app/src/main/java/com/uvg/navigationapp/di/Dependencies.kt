@@ -11,7 +11,7 @@ object Dependencies {
         return Room.databaseBuilder(
             context,
             RickAndMortyDB::class.java,
-            "uvg.db"
+            "rickandmorty.db"
         ).build()
     }
 
