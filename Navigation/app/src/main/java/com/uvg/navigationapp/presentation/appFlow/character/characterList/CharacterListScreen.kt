@@ -32,6 +32,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.uvg.navigationapp.data.source.CharacterDb
 import com.uvg.navigationapp.domain.model.Character
+import com.uvg.navigationapp.domain.network.util.DataError
 import com.uvg.navigationapp.presentation.appFlow.location.locationDetails.ErrorLayout
 import com.uvg.navigationapp.presentation.appFlow.location.locationDetails.LoadingLayout
 import com.uvg.navigationapp.ui.theme.NavigationAppTheme
@@ -47,7 +48,7 @@ fun CharacterListRoute(
         state = state,
         onCharacterClick = onCharacterClick,
         onClickWhileLoading = {
-            viewModel.throwError()
+            viewModel.throwError(DataError.GENERIC_ERROR)
         },
         onRetryClick = {
             viewModel.getCharacters()

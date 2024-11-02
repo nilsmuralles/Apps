@@ -7,8 +7,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.uvg.navigationapp.data.local.dao.CharacterDAO
+import com.uvg.navigationapp.data.network.KtorRickMortyAPI
 import com.uvg.navigationapp.data.repository.LocalCharacterRepository
 import com.uvg.navigationapp.di.Dependencies
+import com.uvg.navigationapp.domain.network.util.DataError
+import com.uvg.navigationapp.domain.network.util.onError
+import com.uvg.navigationapp.domain.network.util.onSuccess
+import com.uvg.navigationapp.domain.repository.CharacterRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,11 +21,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CharacterLIstViewModel(
-    private val characterDao: CharacterDAO
+    private val characterRepository: CharacterRepository
 ): ViewModel() {
-    private val characterRepository = LocalCharacterRepository(
-        characterDao = characterDao
-    )
     private val _uiState: MutableStateFlow<CharacterLIstState> = MutableStateFlow(CharacterLIstState())
     val uiState = _uiState.asStateFlow()
 
@@ -28,15 +30,7 @@ class CharacterLIstViewModel(
         getCharacters()
     }
 
-    private fun populateCharacters() {
-        viewModelScope.launch {
-            characterRepository.insertAllCharacters()
-        }
-    }
-
     fun getCharacters() {
-        populateCharacters()
-
         viewModelScope.launch {
             _uiState.update { state ->
                 state.copy(
@@ -45,26 +39,26 @@ class CharacterLIstViewModel(
                 )
             }
 
-            delay(4000)
-            val characters = characterRepository.getAllCharacters()
-
-            _uiState.update { state ->
-                state.copy(
-                    data = characters,
-                    isLoading = false
-                )
-            }
+            characterRepository.getAllCharacters()
+                .onSuccess { characters ->
+                    _uiState.update { state ->
+                        state.copy(
+                            data = characters,
+                            isLoading = false,
+                            hasError = false
+                        )
+                    }
+                }
+                .onError { error -> throwError(error) }
         }
     }
 
-    fun throwError(){
-        viewModelScope.launch {
-            _uiState.update { state ->
-                state.copy(
-                    hasError = true,
-                    isLoading = false
-                )
-            }
+    fun throwError(error: DataError){
+        _uiState.update { state ->
+            state.copy(
+                hasError = true,
+                isLoading = false
+            )
         }
     }
 
@@ -73,8 +67,12 @@ class CharacterLIstViewModel(
             initializer {
                 val application = checkNotNull(this[APPLICATION_KEY])
                 val db = Dependencies.provideDatabase(application)
+                val api = KtorRickMortyAPI(Dependencies.provideHttpClient())
                 CharacterLIstViewModel(
-                    characterDao = db.characterDao()
+                    characterRepository = LocalCharacterRepository(
+                        rickMortyAPI = api,
+                        characterDao = db.characterDao()
+                    )
                 )
             }
         }
